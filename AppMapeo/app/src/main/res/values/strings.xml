@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Mapeo App</string>
+    <string name="app_version">1.0.0</string>
+    <string name="app_description">Mapeo App es una aplicación desarrollada íntegramente por el INCUAPA para el registro arqueológico y paleontológico en el campo. Desarrollada por Juan Manuel Capuano (CPA Conicet/Incuapa/Unicen).</string>
+    <string name="app_dev_name">Desarrollado por Juan Manuel Capuano</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
