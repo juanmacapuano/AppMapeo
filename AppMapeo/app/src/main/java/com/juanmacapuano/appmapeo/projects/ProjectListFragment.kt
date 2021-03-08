@@ -15,6 +15,7 @@ import com.juanmacapuano.appmapeo.databinding.FragmentProjectListBinding
 import android.app.Activity
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.juanmacapuano.appmapeo.ProjectItemFragment
 
 /**
@@ -49,7 +50,7 @@ class ProjectListFragment : Fragment() {
         projectListViewModel = ViewModelProvider(this).get(ProjectListViewModel::class.java)
 
         binding.faAddProject.setOnClickListener(View.OnClickListener {
-            val intent = Intent(this.requireContext(), ProjectItemFragment::class.java)
+            findNavController().navigate(R.id.itemProjectFragment)
 
         })
 
