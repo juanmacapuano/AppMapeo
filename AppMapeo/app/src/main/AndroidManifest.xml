@@ -3,6 +3,7 @@
     package="com.juanmacapuano.appmapeo">
 
     <application
+        android:name=".MapeoAplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppMapeoIncuapa">
         <activity android:name=".BaseActivity" />
-        <activity android:name=".projects.ListProjectsActivity" />
+        <activity android:name=".projects.ProjectsListActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,6 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

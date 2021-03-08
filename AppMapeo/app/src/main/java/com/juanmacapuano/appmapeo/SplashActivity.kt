@@ -1,12 +1,11 @@
 package com.juanmacapuano.appmapeo
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.juanmacapuano.appmapeo.databinding.ActivitySplashBinding
 import android.view.animation.AnimationUtils
-import com.juanmacapuano.appmapeo.projects.ListProjectsActivity
+import com.juanmacapuano.appmapeo.projects.ProjectsListActivity
 
 const val SPLASH_TIME_OUT : Long = 3500
 
@@ -30,7 +29,7 @@ class SplashActivity : BaseActivity() {
         }
 
         Handler().postDelayed({
-            startActivity(Intent(this, ListProjectsActivity::class.java))
+            startActivity(Intent(this, ProjectsListActivity::class.java))
         }, SPLASH_TIME_OUT)
 
     }

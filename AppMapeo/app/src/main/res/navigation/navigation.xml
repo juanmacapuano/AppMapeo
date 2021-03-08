@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
     app:startDestination="@id/listProjectFragment">
 
     <fragment
         android:id="@+id/listProjectFragment"
-        android:name="com.juanmacapuano.appmapeo.projects.ListProjectFragment"
-        android:label="ListProjectFragment" />
+        android:name="com.juanmacapuano.appmapeo.projects.ProjectListFragment"
+        android:label="ListProjectFragment" >
+        <action
+            android:id="@+id/action_listProjectFragment_to_itemProjectFragment"
+            app:destination="@id/itemProjectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemProjectFragment"
+        android:name="com.juanmacapuano.appmapeo.ProjectItemFragment"
+        android:label="item_project_fragment"
+        tools:layout="@layout/item_project_fragment" />
 </navigation>
