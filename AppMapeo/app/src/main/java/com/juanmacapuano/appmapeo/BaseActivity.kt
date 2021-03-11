@@ -19,7 +19,12 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     private fun createStringVal() {
+    }
 
-
+    open fun showHomeUpIcon(title: String?) {
+        if (supportActionBar != null) {
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.title = title
+        }
     }
 }

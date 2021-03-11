@@ -1,67 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="76dp"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="12dp"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    android:id="@+id/cv_item_project"
-    card_view:cardBackgroundColor="#FFFF"
-    card_view:cardCornerRadius="8dp"
-    card_view:contentPadding="10dp"
-    android:foreground="?selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_item_project"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="76dp"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        card_view:cardBackgroundColor="#FFFF"
+        card_view:cardCornerRadius="8dp"
+        card_view:contentPadding="10dp"
+        android:foreground="?selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/layout_item_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/tv_cv_title"
-                android:layout_width="181dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="68dp"
-                android:textStyle="bold"
-                tools:text="texto1" />
-
-            <TextView
-                android:id="@+id/tv_cv_description"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="16dp"
-                android:gravity="end|center_vertical"
-                tools:text="texto2"/>
+                android:layout_height="wrap_content">
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_cv_title"
+                    android:layout_width="181dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="68dp"
+                    android:textStyle="bold"
+                    tools:text="texto1" />
 
-            <TextView
-                android:id="@+id/tv_cv_descriptionDown"
+                <TextView
+                    android:id="@+id/tv_cv_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="end|center_vertical"
+                    tools:text="texto2"/>
+
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="26dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:textStyle="italic"
-                android:gravity="top"
-                tools:text="texto 3" />
+                android:layout_height="wrap_content">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_cv_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="26dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:textStyle="italic"
+                    android:gravity="top"
+                    tools:text="texto 3" />
 
-    </RelativeLayout>
+            </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
