@@ -49,7 +49,7 @@ class ProjectsListActivity : BaseActivity() {
 
     fun show(projectEntity: ProjectEntity) {
         val projectItemFragment: ProjectItemFragment =
-            ProjectItemFragment().forProject(projectEntity.id)
+            ProjectItemFragment().forProject(projectEntity)
         supportFragmentManager
             .beginTransaction()
             .addToBackStack("project")

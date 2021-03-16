@@ -4,10 +4,13 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
+import com.juanmacapuano.appmapeo.ProjectItemFragment.Companion.projectEntity
 import com.juanmacapuano.appmapeo.room.ProjectDao
 import com.juanmacapuano.appmapeo.room.ProjectEntity
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.withContext
 
 class AppRepository(application: Application) {
 
@@ -28,9 +31,10 @@ class AppRepository(application: Application) {
         projectDao = databaseApp.projectoDao()
     }
 
-    suspend fun insertProject(projectEntity: ProjectEntity) : Long{
-       return projectDao.insert(projectEntity)
+    suspend fun insertProject(project: ProjectEntity) = withContext(Dispatchers.IO) {
+        projectDao.insert(project)
     }
+
 
     fun getAllProject() : LiveData<List<ProjectEntity>> {
         return projectDao.getAllProjects()

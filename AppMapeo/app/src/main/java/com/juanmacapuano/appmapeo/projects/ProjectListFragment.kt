@@ -23,7 +23,7 @@ import com.juanmacapuano.appmapeo.room.ProjectEntity
 
 class ProjectListFragment : Fragment() {
 
-    lateinit var binding : FragmentProjectListBinding
+    var binding : FragmentProjectListBinding? = null
     lateinit var projectListViewModel: ProjectListViewModel
     lateinit var madapter: ProjectAdapter
 
@@ -40,15 +40,15 @@ class ProjectListFragment : Fragment() {
 
         //ViewModel
         projectListViewModel = ViewModelProvider(this).get(ProjectListViewModel::class.java)
-        binding.lifecycleOwner = viewLifecycleOwner  //this
+        binding?.lifecycleOwner = viewLifecycleOwner  //this
 
         //RecycleView
-        binding.rvListProjects.apply {
+        binding?.rvListProjects?.apply {
             adapter = madapter
             layoutManager = LinearLayoutManager(requireContext())
         }
 
-        binding.faAddProject.setOnClickListener(View.OnClickListener {
+        binding?.faAddProject?.setOnClickListener(View.OnClickListener {
             findNavController().navigate(R.id.itemProjectFragment)
 
         })
@@ -56,7 +56,7 @@ class ProjectListFragment : Fragment() {
         setHasOptionsMenu(true)
 
         // Inflate the layout for this fragment
-        return binding.root
+        return binding?.root
     }
 
     private fun listItemClicked(selectedItem: ProjectEntity) {
@@ -75,7 +75,7 @@ class ProjectListFragment : Fragment() {
             Log.i("TAG", it.toString())
             madapter.setProjectList(it)
             madapter.notifyDataSetChanged()
-            binding.executePendingBindings()
+            binding?.executePendingBindings()
         })
     }
 
@@ -83,5 +83,10 @@ class ProjectListFragment : Fragment() {
         menu.findItem(R.id.item_toolbar_confirm).isVisible = false
         menu.findItem(R.id.item_toolbar_edit).isVisible = false
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }
