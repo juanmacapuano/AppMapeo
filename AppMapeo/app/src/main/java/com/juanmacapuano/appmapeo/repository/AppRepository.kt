@@ -28,8 +28,8 @@ class AppRepository(application: Application) {
         projectDao = databaseApp.projectoDao()
     }
 
-    suspend fun insertProject(projectEntity: ProjectEntity) {
-        projectDao.insert(projectEntity)
+    suspend fun insertProject(projectEntity: ProjectEntity) : Long{
+       return projectDao.insert(projectEntity)
     }
 
     fun getAllProject() : LiveData<List<ProjectEntity>> {

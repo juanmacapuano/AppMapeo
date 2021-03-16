@@ -32,7 +32,7 @@ class ProjectsListActivity : BaseActivity() {
     private fun setupToolbar() {
         val toolbar: Toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-        showHomeUpIcon(getString(R.string.item_project_title_toolbar))
+        showHomeUpIcon(getString(R.string.item_project_list_toolbar))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

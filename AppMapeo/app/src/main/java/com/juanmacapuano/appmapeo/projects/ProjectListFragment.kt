@@ -2,9 +2,7 @@ package com.juanmacapuano.appmapeo.projects
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -55,6 +53,8 @@ class ProjectListFragment : Fragment() {
 
         })
 
+        setHasOptionsMenu(true)
+
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -71,7 +71,7 @@ class ProjectListFragment : Fragment() {
     }
 
     fun suscribeUI() {
-        projectListViewModel.getAllProject().observe(this, Observer {
+        projectListViewModel.getAllProject().observe(viewLifecycleOwner, Observer {
             Log.i("TAG", it.toString())
             madapter.setProjectList(it)
             madapter.notifyDataSetChanged()
@@ -79,5 +79,9 @@ class ProjectListFragment : Fragment() {
         })
     }
 
-
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.findItem(R.id.item_toolbar_confirm).isVisible = false
+        menu.findItem(R.id.item_toolbar_edit).isVisible = false
+        super.onCreateOptionsMenu(menu, inflater)
+    }
 }

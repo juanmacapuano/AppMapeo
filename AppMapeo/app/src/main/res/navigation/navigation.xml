@@ -17,5 +17,10 @@
         android:id="@+id/itemProjectFragment"
         android:name="com.juanmacapuano.appmapeo.ProjectItemFragment"
         android:label="item_project_fragment"
-        tools:layout="@layout/item_project_fragment" />
+        tools:layout="@layout/fragment_item_project" >
+        <action
+            android:id="@+id/action_itemProjectFragment_to_listProjectFragment"
+            app:destination="@id/listProjectFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
 </navigation>

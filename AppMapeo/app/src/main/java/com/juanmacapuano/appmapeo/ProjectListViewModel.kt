@@ -1,9 +1,13 @@
 package com.juanmacapuano.appmapeo
 
 import android.app.Application
+import android.util.Log
+import android.widget.Toast
 import androidx.databinding.Bindable
 import androidx.databinding.Observable
 import androidx.lifecycle.*
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import com.juanmacapuano.appmapeo.repository.AppRepository
 import com.juanmacapuano.appmapeo.repository.DatabaseApp
 import com.juanmacapuano.appmapeo.room.ProjectEntity
@@ -23,14 +27,15 @@ class ProjectListViewModel (application: Application) : AndroidViewModel(applica
     private val scope = CoroutineScope(coroutineContext)
 
     @Bindable
-    val tv_item_project_title = MutableLiveData<String>()
+    val et_item_project_title = MutableLiveData<String>()
 
     @Bindable
-    val tv_item_project_date = MutableLiveData<String>()
+    val et_item_project_date = MutableLiveData<String>()
 
     @Bindable
-    val tv_item_project_location = MutableLiveData<String>()
+    val et_item_project_location = MutableLiveData<String>()
 
+    val returnInsertIdItemProject = MutableLiveData<Long>()
 
     init {
         val projectDao = DatabaseApp.getDatabase(
@@ -41,11 +46,19 @@ class ProjectListViewModel (application: Application) : AndroidViewModel(applica
 
     }
 
-    fun insertProject(projectEntity: ProjectEntity) {
+    fun insertProject(){
+        var projectEntity = ProjectEntity()
+        projectEntity.name = et_item_project_title.value!!
+        projectEntity.date = et_item_project_date.value!!
+        projectEntity.location = et_item_project_location.value!!
+        projectEntity.delete = 0
+
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insertProject(projectEntity)
+            Log.e("corroutine", "entro")
+            returnInsertIdItemProject.postValue(repository.insertProject(projectEntity))
         }
     }
+
     fun getAllProject() : LiveData<List<ProjectEntity>> {
         return getAllProjects
     }

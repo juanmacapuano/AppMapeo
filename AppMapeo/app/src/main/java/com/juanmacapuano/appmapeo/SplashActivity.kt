@@ -30,6 +30,7 @@ class SplashActivity : BaseActivity() {
 
         Handler().postDelayed({
             startActivity(Intent(this, ProjectsListActivity::class.java))
+            finish()
         }, SPLASH_TIME_OUT)
 
     }

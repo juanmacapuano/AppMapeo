@@ -11,7 +11,7 @@ import androidx.room.Update
 interface ProjectDao {
 
     @Insert
-    suspend fun insert(project: ProjectEntity)
+    suspend fun insert(project: ProjectEntity) : Long
 
     @Update
     suspend fun update(project: ProjectEntity) : Int
