@@ -24,7 +24,7 @@ import com.juanmacapuano.appmapeo.room.ProjectEntity
 class ProjectListFragment : Fragment() {
 
     var binding : FragmentProjectListBinding? = null
-    lateinit var projectListViewModel: ProjectListViewModel
+    lateinit var viewModel: ProjectListViewModel
     lateinit var madapter: ProjectAdapter
 
 
@@ -32,14 +32,20 @@ class ProjectListFragment : Fragment() {
         const val TAG = "ProjectListFragment"
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_project_list, container, false)
-        madapter = ProjectAdapter({selectedItem:ProjectEntity->listItemClicked(selectedItem)})
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_project_list,
+            container,
+            false
+        )
+        madapter = ProjectAdapter({ selectedItem: ProjectEntity -> listItemClicked(selectedItem) })
 
         //ViewModel
-        projectListViewModel = ViewModelProvider(this).get(ProjectListViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ProjectListViewModel::class.java)
         binding?.lifecycleOwner = viewLifecycleOwner  //this
 
         //RecycleView
@@ -50,7 +56,6 @@ class ProjectListFragment : Fragment() {
 
         binding?.faAddProject?.setOnClickListener(View.OnClickListener {
             findNavController().navigate(R.id.itemProjectFragment)
-
         })
 
         setHasOptionsMenu(true)
@@ -71,7 +76,7 @@ class ProjectListFragment : Fragment() {
     }
 
     fun suscribeUI() {
-        projectListViewModel.getAllProject().observe(viewLifecycleOwner, Observer {
+        viewModel.getAllProject().observe(viewLifecycleOwner, Observer {
             Log.i("TAG", it.toString())
             madapter.setProjectList(it)
             madapter.notifyDataSetChanged()
@@ -83,6 +88,17 @@ class ProjectListFragment : Fragment() {
         menu.findItem(R.id.item_toolbar_confirm).isVisible = false
         menu.findItem(R.id.item_toolbar_edit).isVisible = false
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            /*R.id.item_toolbar_edit -> insertProjectConfirm()
+            android.R.id.home, R.id.cancelarAlta -> alertDialogBuilder()
+            else -> {
+            }*/
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroyView() {

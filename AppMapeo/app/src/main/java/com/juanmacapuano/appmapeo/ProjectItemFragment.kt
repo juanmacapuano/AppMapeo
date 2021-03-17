@@ -1,13 +1,12 @@
 package com.juanmacapuano.appmapeo
 
-import android.content.Intent.getIntent
-import android.content.Intent.parseUri
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -24,24 +23,26 @@ class ProjectItemFragment : Fragment() {
         private const val KEY_PROJECT_NAME = "project_name"
         private const val KEY_PROJECT_DATE = "project_date"
         private const val KEY_PROJECT_LOCATION = "project_location"
+
         lateinit var projectEntity : ProjectEntity
     }
 
     var binding: FragmentItemProjectBinding? = null
     lateinit var viewModel: ProjectListViewModel
-    var newRowId : Long = -1
+    private var isUpdate = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val arg : Bundle
         projectEntity = ProjectEntity()
-        var extras: Bundle? = activity?.intent?.extras
-        extras = this.arguments
+        var extras: Bundle? = this.arguments
         if (extras != null) {
             val projectId : Long = extras.getLong(KEY_PROJECT_ID)
             val projectName : String = extras.getString(KEY_PROJECT_NAME)!!
             val projectDate : String = extras.getString(KEY_PROJECT_DATE)!!
             val projectLocation : String = extras.getString(KEY_PROJECT_LOCATION)!!
+            isUpdate = true
             projectEntity.name = projectName
             projectEntity.date = projectDate
             projectEntity.location = projectLocation
@@ -72,8 +73,28 @@ class ProjectItemFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             itemFragment = this@ProjectItemFragment
         }
-        binding?.viewModel?.initUpdate(projectEntity)
+        if (isUpdate) {
+            binding?.viewModel?.initUpdate(projectEntity)
+        }
         binding?.executePendingBindings();
+
+        viewModel.message.observe(viewLifecycleOwner, Observer { it ->
+            it.getContentIfNotHandled()?.let {
+                Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+            }
+        })
+
+        if (isUpdate) {
+            setDisabledFields()
+        } else {
+            viewModel.setEmptyFields()
+        }
+    }
+
+    private fun setDisabledFields() {
+        binding?.etItemProjectTitle?.isEnabled = false
+        binding?.etItemProjectDate?.isEnabled = false
+        binding?.etItemProjectDescription?.isEnabled = false
     }
 
     /** Creates product fragment for specific product ID  */
@@ -90,24 +111,28 @@ class ProjectItemFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.findItem(R.id.item_toolbar_search).isVisible = false
-        menu.findItem(R.id.item_toolbar_edit).isVisible = false
-        menu.findItem(R.id.item_toolbar_confirm).isVisible = true
+        menu.findItem(R.id.item_toolbar_edit).isVisible = true
+        menu.findItem(R.id.item_toolbar_confirm).isVisible = false
     }
 
-    fun insertProject() = lifecycleScope.launch {
-        val newRowId = viewModel.insertProject()
-        if (newRowId > 0) {
-            Toast
-                .makeText(context, R.string.item_project_save_message_ok, Toast.LENGTH_SHORT)
+    fun insertOrUpdateProject() = lifecycleScope.launch {
+        var newRowId = -1
+        val checkEmptyFields = viewModel.checkEmptyFields()
+        if (checkEmptyFields) {
+            newRowId = viewModel.insertOrUpdateProject().toInt()
+            if (newRowId > 0) {
+                Toast
+                    .makeText(context, R.string.item_project_save_message_ok, Toast.LENGTH_SHORT)
+                    .show()
+                findNavController().navigate(R.id.action_itemProjectFragment_to_listProjectFragment)
+            } else Toast
+                .makeText(context, "ID: $newRowId", Toast.LENGTH_SHORT)
                 .show()
-            findNavController().navigate(R.id.action_itemProjectFragment_to_listProjectFragment)
-        } else Toast
-            .makeText(context, "ID: $newRowId", Toast.LENGTH_SHORT)
-            .show()
+        }
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         binding = null
+        super.onDestroyView()
     }
 }

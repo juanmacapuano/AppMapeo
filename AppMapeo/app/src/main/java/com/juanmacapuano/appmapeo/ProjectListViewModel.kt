@@ -24,6 +24,8 @@ class ProjectListViewModel(application: Application) : AndroidViewModel(applicat
     private val coroutineContext: CoroutineContext
         get() = parentJob + Dispatchers.Main
     private val scope = CoroutineScope(coroutineContext)
+    private lateinit var projectToUpdateOrDelete: ProjectEntity
+    private var isUpdateOrDelete = false
 
     @Bindable
     val et_item_project_title = MutableLiveData<String>()
@@ -34,45 +36,55 @@ class ProjectListViewModel(application: Application) : AndroidViewModel(applicat
     @Bindable
     val et_item_project_location = MutableLiveData<String>()
 
+    @Bindable
+    val saveOrUpdateButtonText = MutableLiveData<String>()
+
+    private val statusMessage = MutableLiveData<Event<String>>()
+
+    val message: LiveData<Event<String>>
+        get() = statusMessage
+
     init {
         val projectDao = DatabaseApp.getDatabase(
             application, scope
         ).projectoDao()
         repository = AppRepository(application)
         getAllProjects = repository.getAllProject()
+        saveOrUpdateButtonText.value = "Crear Proyecto"
 
     }
 
-    /*fun insertProyecto(): Long {
-        var projectEntity = ProjectEntity()
-        projectEntity.name = et_item_project_title.value!!
-        projectEntity.date = et_item_project_date.value!!
-        projectEntity.location = et_item_project_location.value!!
-        projectEntity.delete = 0
-        et_item_project_title.value = ""
-        et_item_project_date.value = ""
-        et_item_project_location.value = ""
-
-        val callable: Callable<Long> = Callable { repository.insertProjecto(projectEntity) }
-        val future = Executors.newSingleThreadExecutor().submit(callable)
-        try {
-            return future.get()
-        } catch (e: ExecutionException) {
-            e.printStackTrace()
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
-        return -1
-    }*/
-
-    suspend fun insertProject(): Long {
+    suspend fun insertOrUpdateProject(): Long {
         val projectEntity = ProjectEntity().apply {
             name = et_item_project_title.value!!
             date = et_item_project_date.value!!
             location = et_item_project_location.value!!
             delete = 0
         }
-        return repository.insertProject(projectEntity)
+        return if (isUpdateOrDelete) {
+            isUpdateOrDelete = false
+            repository.updateProject(projectEntity).toLong()
+        } else {
+            et_item_project_title.value = ""
+            et_item_project_date.value = ""
+            et_item_project_location.value = ""
+            repository.insertProject(projectEntity)
+        }
+    }
+
+    fun checkEmptyFields() : Boolean {
+        return if (et_item_project_title.value == null) {
+            statusMessage.value = Event("Ingrese un nombre")
+            false
+        } else if (et_item_project_date.value == null) {
+            statusMessage.value = Event("Ingrese una fecha")
+            false
+        } else if (et_item_project_location.value == null) {
+            statusMessage.value = Event("Ingrese una ubicación")
+            false
+        } else {
+            true
+        }
     }
 
     fun getAllProject() : LiveData<List<ProjectEntity>> {
@@ -83,19 +95,22 @@ class ProjectListViewModel(application: Application) : AndroidViewModel(applicat
         et_item_project_location.value = projectEntity.location
         et_item_project_title.value = projectEntity.name
         et_item_project_date.value = projectEntity.date
+        projectToUpdateOrDelete = projectEntity
+        isUpdateOrDelete = true
+        saveOrUpdateButtonText.value = "Actualizar Proyecto"
+
     }
 
     fun setEmptyFields() {
-        et_item_project_location.value = ""
-        et_item_project_title.value = ""
-        et_item_project_date.value = ""
+        et_item_project_title.value = null
+        et_item_project_date.value = null
+        et_item_project_location.value = null
+        saveOrUpdateButtonText.value = "Crear Proyecto"
+        isUpdateOrDelete = false
     }
 
-    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
+    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {    }
 
-    }
+    override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {    }
 
-    override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
-
-    }
 }

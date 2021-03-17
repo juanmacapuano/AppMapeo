@@ -14,7 +14,7 @@ import kotlinx.coroutines.withContext
 
 class AppRepository(application: Application) {
 
-    private lateinit var projectDao: ProjectDao
+    private var projectDao: ProjectDao
     private val applicationScope = CoroutineScope(SupervisorJob())
 
     companion object {
@@ -33,6 +33,10 @@ class AppRepository(application: Application) {
 
     suspend fun insertProject(project: ProjectEntity) = withContext(Dispatchers.IO) {
         projectDao.insert(project)
+    }
+
+    suspend fun updateProject(projectEntity: ProjectEntity) = withContext(Dispatchers.IO) {
+        projectDao.update(projectEntity)
     }
 
 

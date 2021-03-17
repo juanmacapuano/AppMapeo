@@ -13,6 +13,7 @@
     <string name="item_project_list_toolbar">Lista Proyectos</string>
     <string name="item_project_item_toolbar">Item Proyecto</string>
     <string name="item_project_btn_add">Crear Proyecto</string>
+    <string name="item_project_btn_update">Actualizar Proyecto</string>
     <string name="item_project_save_message_ok">Proyecto creado: </string>
     <string name="item_project_save_message_error">Ocurrió un error al crear el Proyecto</string>
 

@@ -14,7 +14,7 @@ interface ProjectDao {
     suspend fun insert(project: ProjectEntity) : Long
 
     @Insert
-    fun insertar(project: ProjectEntity) : Long
+    suspend fun insertar(project: ProjectEntity) : Long
 
     @Update
     suspend fun update(project: ProjectEntity) : Int
