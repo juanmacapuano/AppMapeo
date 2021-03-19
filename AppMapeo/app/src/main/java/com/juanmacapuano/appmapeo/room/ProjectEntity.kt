@@ -17,7 +17,7 @@ const val COLUMN_PROJECT_DELETE: String = "delete"
 data class ProjectEntity (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = COLUMN_ID)
-    val id : Long = 0,
+    var id : Long = 0,
     @ColumnInfo(name = COLUMN_PROJECT_NAME)
     var name : String,
     @ColumnInfo(name = COLUMN_PROJECT_LOCATION)

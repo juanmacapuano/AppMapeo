@@ -11,15 +11,16 @@
 
         <variable
             name="itemFragment"
-            type="com.juanmacapuano.appmapeo.ProjectItemFragment" />
+            type="com.juanmacapuano.appmapeo.projects.ProjectItemFragment" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProjectItemFragment">
+    tools:context=".projects.ProjectItemFragment">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:minHeight="@dimen/project_item_min_height"
@@ -104,6 +105,18 @@
 
 
     </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_item_mapeo_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        android:onClick="@{()->itemFragment.goToMapeoFragmentList()}"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@mipmap/ic_list" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

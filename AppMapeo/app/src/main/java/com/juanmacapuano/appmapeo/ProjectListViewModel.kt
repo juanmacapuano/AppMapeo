@@ -6,6 +6,7 @@ import androidx.databinding.Observable
 import androidx.lifecycle.*
 import com.juanmacapuano.appmapeo.repository.AppRepository
 import com.juanmacapuano.appmapeo.repository.DatabaseApp
+import com.juanmacapuano.appmapeo.room.MapeoEntity
 import com.juanmacapuano.appmapeo.room.ProjectEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,13 +20,15 @@ import kotlin.coroutines.CoroutineContext
 class ProjectListViewModel(application: Application) : AndroidViewModel(application), Observable {
 
     private val getAllProjects : LiveData<List<ProjectEntity>>
+    private lateinit var getAllMapeos : LiveData<List<MapeoEntity>>
     private val repository : AppRepository
     private var parentJob = Job()
     private val coroutineContext: CoroutineContext
         get() = parentJob + Dispatchers.Main
     private val scope = CoroutineScope(coroutineContext)
     private lateinit var projectToUpdateOrDelete: ProjectEntity
-    private var isUpdateOrDelete = false
+    var isUpdateOrDelete = false
+    private val idProject : Long = -1
 
     @Bindable
     val et_item_project_title = MutableLiveData<String>()
@@ -46,29 +49,30 @@ class ProjectListViewModel(application: Application) : AndroidViewModel(applicat
 
     init {
         val projectDao = DatabaseApp.getDatabase(
-            application, scope
-        ).projectoDao()
+            application, scope).projectoDao()
+        val mapeoDao = DatabaseApp.getDatabase(
+            application, scope).mapeoDao()
         repository = AppRepository(application)
         getAllProjects = repository.getAllProject()
         saveOrUpdateButtonText.value = "Crear Proyecto"
-
     }
 
     suspend fun insertOrUpdateProject(): Long {
-        val projectEntity = ProjectEntity().apply {
-            name = et_item_project_title.value!!
-            date = et_item_project_date.value!!
-            location = et_item_project_location.value!!
-            delete = 0
-        }
+
         return if (isUpdateOrDelete) {
             isUpdateOrDelete = false
-            repository.updateProject(projectEntity).toLong()
+            projectToUpdateOrDelete.name = et_item_project_title.value!!
+            projectToUpdateOrDelete.date = et_item_project_date.value!!
+            projectToUpdateOrDelete.location = et_item_project_location.value!!
+            repository.updateProject(projectToUpdateOrDelete).toLong()
         } else {
+            val name = et_item_project_title.value!!
+            val date = et_item_project_date.value!!
+            val location = et_item_project_location.value!!
             et_item_project_title.value = ""
             et_item_project_date.value = ""
             et_item_project_location.value = ""
-            repository.insertProject(projectEntity)
+            repository.insertProject(ProjectEntity(0, name, location, date, 0))
         }
     }
 
@@ -91,6 +95,10 @@ class ProjectListViewModel(application: Application) : AndroidViewModel(applicat
         return getAllProjects
     }
 
+    fun getAllMapeos() : LiveData<List<MapeoEntity>> {
+        return repository.getAllMapeos(projectToUpdateOrDelete.id)
+    }
+
     fun initUpdate(projectEntity: ProjectEntity) {
         et_item_project_location.value = projectEntity.location
         et_item_project_title.value = projectEntity.name
@@ -101,16 +109,20 @@ class ProjectListViewModel(application: Application) : AndroidViewModel(applicat
 
     }
 
-    fun setEmptyFields() {
+    fun initInsert() {
+        et_item_project_location.value = null
         et_item_project_title.value = null
         et_item_project_date.value = null
-        et_item_project_location.value = null
-        saveOrUpdateButtonText.value = "Crear Proyecto"
         isUpdateOrDelete = false
+        saveOrUpdateButtonText.value = "Crear Proyecto"
     }
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {    }
 
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {    }
+
+    fun initMapeoFragmentList() {
+        getAllMapeos = getAllMapeos()
+    }
 
 }

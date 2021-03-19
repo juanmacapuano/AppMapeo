@@ -13,13 +13,10 @@ interface ProjectDao {
     @Insert
     suspend fun insert(project: ProjectEntity) : Long
 
-    @Insert
-    suspend fun insertar(project: ProjectEntity) : Long
-
     @Update
     suspend fun update(project: ProjectEntity) : Int
 
-    @Query("SELECT * FROM " + TABLE_NAME_PROJECT + " ORDER BY " + COLUMN_ID + " DESC")
+    @Query("SELECT * FROM $TABLE_NAME_PROJECT ORDER BY $COLUMN_ID DESC")
     fun getAllProjects() : LiveData<List<ProjectEntity>>
 
 }

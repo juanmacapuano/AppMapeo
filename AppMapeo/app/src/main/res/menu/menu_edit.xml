@@ -3,23 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/item_toolbar_search"
-        android:icon="@drawable/ic_search"
-        android:title="New search"
-        app:showAsAction="ifRoom"
-        app:actionViewClass="android.widget.SearchView"
-        />
-    <item
         android:id="@+id/item_toolbar_edit"
         android:icon="@drawable/ic_create"
         android:title="Editar"
         app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/item_toolbar_confirm"
-        android:icon="@drawable/ic_confirm"
-        android:title="Confirm"
-        app:showAsAction="never" />
 
     <item
         android:id="@+id/acerca_de"
@@ -30,12 +17,6 @@
     <item
         android:id="@+id/addItemTabla"
         android:title="Agregar item"
-        app:showAsAction="never"
-        />
-
-    <item
-        android:id="@+id/exportarDb"
-        android:title="Exportar"
         app:showAsAction="never"
         />
 

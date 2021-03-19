@@ -15,13 +15,19 @@
     </fragment>
     <fragment
         android:id="@+id/itemProjectFragment"
-        android:name="com.juanmacapuano.appmapeo.ProjectItemFragment"
+        android:name="com.juanmacapuano.appmapeo.projects.ProjectItemFragment"
         android:label="item_project_fragment"
         tools:layout="@layout/fragment_item_project" >
         <action
             android:id="@+id/action_itemProjectFragment_to_listProjectFragment"
             app:destination="@id/listProjectFragment"
-            app:popUpTo="@id/listProjectFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_itemProjectFragment_to_mapeoListFragment"
+            app:destination="@id/mapeoListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/mapeoListFragment"
+        android:name="com.juanmacapuano.appmapeo.mapeos.MapeoListFragment"
+        android:label="MapeoListFragment" />
 </navigation>

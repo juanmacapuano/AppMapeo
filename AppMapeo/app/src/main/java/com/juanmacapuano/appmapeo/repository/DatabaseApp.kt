@@ -5,6 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.juanmacapuano.appmapeo.room.MapeoDao
+import com.juanmacapuano.appmapeo.room.MapeoEntity
 import com.juanmacapuano.appmapeo.room.ProjectDao
 import com.juanmacapuano.appmapeo.room.ProjectEntity
 import kotlinx.coroutines.CoroutineScope
@@ -12,13 +14,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Database(
-    entities = [ProjectEntity::class],
-        version = 1,
+    entities = [ProjectEntity::class, MapeoEntity::class],
+        version = 2,
         exportSchema = false
 )
 abstract class DatabaseApp : RoomDatabase(){
 
     abstract fun projectoDao() : ProjectDao
+
+    abstract fun mapeoDao() : MapeoDao
 
     companion object {
         @Volatile

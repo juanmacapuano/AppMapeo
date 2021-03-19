@@ -27,7 +27,6 @@ class ProjectAdapter(private val clickListener:(ProjectEntity)->Unit) : Recycler
     fun setProjectList(projectList : List<ProjectEntity>) {
         listProject.clear()
         listProject.addAll(projectList)
-
     }
 
     override fun getItemCount(): Int {
