@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/listProjectFragment">
+
+    <fragment
+        android:id="@+id/listProjectFragment"
+        android:name="com.juanmacapuano.appmapeo.projects.ProjectListFragment"
+        android:label="ListProjectFragment" >
+        <action
+            android:id="@+id/action_listProjectFragment_to_itemProjectFragment"
+            app:destination="@id/itemProjectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemProjectFragment"
+        android:name="com.juanmacapuano.appmapeo.projects.ProjectItemFragment"
+        android:label="item_project_fragment"
+        tools:layout="@layout/fragment_item_project" >
+        <action
+            android:id="@+id/action_itemProjectFragment_to_listProjectFragment"
+            app:destination="@id/listProjectFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_itemProjectFragment_to_mapeoListFragment"
+            app:destination="@id/mapeoListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapeoListFragment"
+        android:name="com.juanmacapuano.appmapeo.mapeos.MapeoListFragment"
+        android:label="MapeoListFragment" />
+</navigation>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/item_toolbar_edit"
+        android:icon="@drawable/ic_create"
+        android:title="Editar"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/acerca_de"
+        android:title="Acerca de"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/addItemTabla"
+        android:title="Agregar item"
+        app:showAsAction="never"
+        />
+
+</menu>
