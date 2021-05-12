@@ -16,4 +16,6 @@
     <color name="colorBackground">#FFFFFF</color>
     <color name="colorOnboardingIndicatorInactive">#72BCF7</color>
     <color name="colorBackgroundIncuapa">#FFC107</color>
+    <color name="semi_black_transparent">#99000000</color>
+    <color name="tool_bg">#151414</color>
 </resources>

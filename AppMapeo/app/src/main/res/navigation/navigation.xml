@@ -29,5 +29,32 @@
     <fragment
         android:id="@+id/mapeoListFragment"
         android:name="com.juanmacapuano.appmapeo.mapeos.MapeoListFragment"
-        android:label="MapeoListFragment" />
+        android:label="MapeoListFragment" >
+        <action
+            android:id="@+id/action_mapeoListFragment_to_mapeoItemFragment"
+            app:destination="@id/mapeoItemFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapeoItemFragment"
+        android:name="com.juanmacapuano.appmapeo.mapeos.MapeoItemFragment"
+        android:label="MapeoItemFragment" >
+        <action
+            android:id="@+id/action_mapeoItemFragment_to_mapeoListFragment"
+            app:destination="@id/mapeoListFragment"
+            app:popUpTo="@id/mapeoListFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_mapeoItemFragment_to_photoEdit"
+            app:destination="@id/photoEdit" />
+    </fragment>
+    <fragment
+        android:id="@+id/photoEdit"
+        android:name="com.juanmacapuano.appmapeo.mapeos.PhotoEditFragment"
+        android:label="fragment_photo_edit"
+        tools:layout="@layout/fragment_photo_edit" >
+        <action
+            android:id="@+id/action_photoEdit_to_mapeoItemFragment"
+            app:destination="@id/mapeoItemFragment" />
+    </fragment>
 </navigation>

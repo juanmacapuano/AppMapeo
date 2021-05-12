@@ -18,11 +18,10 @@
                 android:id="@+id/rv_list_mapeos"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="56dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fa_addMapeo"
@@ -32,20 +31,10 @@
                 android:layout_marginBottom="24dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:src="@drawable/ic_clear"
+                android:src="@drawable/ic_add"
                 android:tint="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vacío"
-                app:layout_constraintBottom_toBottomOf="@+id/rv_list_mapeos"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/rv_list_mapeos" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

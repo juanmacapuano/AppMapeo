@@ -9,9 +9,13 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
     defaultConfig {
         applicationId "com.juanmacapuano.appmapeo"
-        minSdkVersion 23
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -36,10 +40,6 @@ android {
     buildFeatures {
         dataBinding true
     }
-
-    viewBinding {
-        enabled = true
-    }
 }
 
 dependencies {
@@ -57,7 +57,9 @@ dependencies {
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     // Annotation processor
-    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+
+    //kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
     implementation "androidx.room:room-runtime:2.2.6"
     kapt  "androidx.room:room-compiler:2.2.6"
@@ -76,11 +78,17 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
     implementation 'androidx.cardview:cardview:1.0.0'
 
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.4'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.4'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+
+    implementation 'com.github.iamutkarshtiwari:Ananas:1.2.3'
+
+    implementation 'ja.burhanrashid52:photoeditor:1.1.1'
+    implementation 'com.ajts.androidmads.SQLite2Excel:library:1.0.4'
+
 }

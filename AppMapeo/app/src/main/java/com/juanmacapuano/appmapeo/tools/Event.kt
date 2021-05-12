@@ -1,4 +1,4 @@
-package com.juanmacapuano.appmapeo
+package com.juanmacapuano.appmapeo.tools
 
 open class Event<out T>(private val content: T) {
 
