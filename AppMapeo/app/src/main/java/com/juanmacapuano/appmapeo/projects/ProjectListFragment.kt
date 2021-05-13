@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.juanmacapuano.appmapeo.model.ProjectListViewModel
+import com.juanmacapuano.appmapeo.viewModel.ProjectListViewModel
 import com.juanmacapuano.appmapeo.R
 import com.juanmacapuano.appmapeo.databinding.FragmentProjectListBinding
 import com.juanmacapuano.appmapeo.room.ProjectEntity

@@ -13,7 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.juanmacapuano.appmapeo.model.ProjectListViewModel
+import com.juanmacapuano.appmapeo.viewModel.ProjectListViewModel
 import com.juanmacapuano.appmapeo.R
 import com.juanmacapuano.appmapeo.databinding.FragmentItemMapeoBinding
 import com.juanmacapuano.appmapeo.room.MapeoEntity

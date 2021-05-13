@@ -1,11 +1,10 @@
-package com.juanmacapuano.appmapeo.model
+package com.juanmacapuano.appmapeo.viewModel
 
 import android.app.Application
 import androidx.databinding.Bindable
 import androidx.databinding.Observable
 import androidx.lifecycle.*
 import com.juanmacapuano.appmapeo.repository.AppRepository
-import com.juanmacapuano.appmapeo.repository.DatabaseApp
 import com.juanmacapuano.appmapeo.room.MapeoEntity
 import com.juanmacapuano.appmapeo.room.ProjectEntity
 import com.juanmacapuano.appmapeo.tools.Event

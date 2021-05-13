@@ -30,7 +30,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.juanmacapuano.appmapeo.R
 import com.juanmacapuano.appmapeo.databinding.FragmentPhotoEditBinding
-import com.juanmacapuano.appmapeo.model.ProjectListViewModel
+import com.juanmacapuano.appmapeo.viewModel.ProjectListViewModel
 import com.juanmacapuano.appmapeo.tools.FileSaveHelper
 import com.juanmacapuano.appmapeo.tools.ToolType
 import iamutkarshtiwari.github.io.ananas.editimage.fragment.TextEditorDialogFragment

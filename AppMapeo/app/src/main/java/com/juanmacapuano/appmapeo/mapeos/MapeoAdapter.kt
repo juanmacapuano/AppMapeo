@@ -1,5 +1,6 @@
 package com.juanmacapuano.appmapeo.mapeos
 
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil

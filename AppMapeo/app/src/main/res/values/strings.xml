@@ -35,6 +35,7 @@
     <string name="item_mapeo_save_message_error">Ocurrió un error al crear/actualizar el Mapeo</string>
     <string name="bdExport">Base de Datos exportada</string>
     <string name="bdExportError">Hubo un error al exportar la Base de Datos</string>
+    <string name="item_mapeo_number">Número</string>
 
     //Dialog
     <string name="msg_save_image">¿ Esta seguro de salir sin guardar los cambios ?</string>

@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.juanmacapuano.appmapeo.model.ProjectListViewModel" />
+            type="com.juanmacapuano.appmapeo.viewModel.ProjectListViewModel" />
 
         <variable
             name="itemFragment"
