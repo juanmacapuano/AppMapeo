@@ -14,10 +14,40 @@
     <string name="item_project_item_toolbar">Item Proyecto</string>
     <string name="item_project_btn_add">Crear Proyecto</string>
     <string name="item_project_btn_update">Actualizar Proyecto</string>
-    <string name="item_project_save_message_ok">Proyecto creado: </string>
+    <string name="item_project_save_message_ok">Proyecto creado</string>
+    <string name="item_project_update_message_ok">Proyecto actualizado</string>
     <string name="item_project_save_message_error">Ocurrió un error al crear el Proyecto</string>
 
+    //ItemMapeo
+    <string name="item_mapeo_list_toolbar">Lista Mapeos</string>
+    <string name="item_mapeo_item_toolbar">Item Mapeo</string>
+    <string name="item_mapeo_list_empty">Lista de Mapeos vacía</string>
+    <string name="item_mapeo_tv_number">Número</string>
+    <string name="item_mapeo_tv_date">Fecha</string>
+    <string name="item_mapeo_tv_grid">Cuadrícula</string>
+    <string name="item_mapeo_tv_findingType">Tipo Hallazgo</string>
+    <string name="item_mapeo_tv_numberStationTot">Num. Est.Total</string>
+    <string name="item_mapeo_tv_stratigraphicUnit">Unidad. Estrat</string>
+    <string name="item_mapeo_tv_observations">Observaciones</string>
+    <string name="item_mapeo_save_message_ok">Mapeo creado</string>
+    <string name="item_mapeo_update_message_ok">Mapeo actualizado</string>
+    <string name="item_mapeo_update_message_exist_number">Ya existe un Mapeo con ese número</string>
+    <string name="item_mapeo_save_message_error">Ocurrió un error al crear/actualizar el Mapeo</string>
+    <string name="bdExport">Base de Datos exportada</string>
+    <string name="bdExportError">Hubo un error al exportar la Base de Datos</string>
+    <string name="item_mapeo_number">Número</string>
 
+    //Dialog
+    <string name="msg_save_image">¿ Esta seguro de salir sin guardar los cambios ?</string>
+    <string name="btn_tomar_foto">Tomar foto</string>
 
+    <string name="label_brush">Brush</string>
+
+    //Spinner key
+    <string name="key_spinner">key_spinner</string>
+    <string name="value_spinner_1">Óseo</string>
+    <string name="value_spinner_2">Lasca</string>
+    <string name="value_spinner_3">Material</string>
+    <string name="value_spinner_4">N/D</string>
 
 </resources>

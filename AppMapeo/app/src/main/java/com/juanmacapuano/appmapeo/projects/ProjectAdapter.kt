@@ -10,7 +10,7 @@ import com.juanmacapuano.appmapeo.R
 import com.juanmacapuano.appmapeo.databinding.ItemListProjectBinding
 import com.juanmacapuano.appmapeo.room.ProjectEntity
 
-class ProjectAdapter(private val clickListener:(ProjectEntity)->Unit) : RecyclerView.Adapter<ProjectAdapter.ItemViewHolder>() {
+class  ProjectAdapter(private val clickListener:(ProjectEntity)->Unit) : RecyclerView.Adapter<ProjectAdapter.ItemViewHolder>() {
 
     private var listProject = ArrayList<ProjectEntity>()
 
@@ -42,7 +42,6 @@ class ProjectAdapter(private val clickListener:(ProjectEntity)->Unit) : Recycler
             binding.layoutItemList.setOnClickListener {
                 clickListener(projectEntity)
             }
-
         }
     }
 }

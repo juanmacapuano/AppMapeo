@@ -19,4 +19,6 @@ interface ProjectDao {
     @Query("SELECT * FROM $TABLE_NAME_PROJECT ORDER BY $COLUMN_ID DESC")
     fun getAllProjects() : LiveData<List<ProjectEntity>>
 
+
+
 }

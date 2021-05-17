@@ -1,16 +1,13 @@
 package com.juanmacapuano.appmapeo.mapeos
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.view.isVisible
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.juanmacapuano.appmapeo.ProjectListViewModel
+import com.juanmacapuano.appmapeo.viewModel.ProjectListViewModel
 import com.juanmacapuano.appmapeo.R
 import com.juanmacapuano.appmapeo.databinding.FragmentMapeoListBinding
 import com.juanmacapuano.appmapeo.room.MapeoEntity
@@ -44,18 +41,25 @@ class MapeoListFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
         }
 
+        binding.faAddMapeo.setOnClickListener(View.OnClickListener {
+            sharedViewModel.initInsertMapeo()
+            findNavController().navigate(R.id.action_mapeoListFragment_to_mapeoItemFragment)
+        })
+
         setHasOptionsMenu(true)
 
         return binding.root
     }
 
     private fun listItemClicked(selectedItem: MapeoEntity) {
-        findNavController().navigate(R.id.action_itemProjectFragment_to_mapeoListFragment)
+        sharedViewModel.initUpdateMapeo(selectedItem)
+        findNavController().navigate(R.id.action_mapeoListFragment_to_mapeoItemFragment)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         suscribeUI()
+        setToolbarConfigurations()
     }
 
     private fun suscribeUI() {
@@ -64,5 +68,22 @@ class MapeoListFragment : Fragment() {
             madapter.notifyDataSetChanged()
             binding.executePendingBindings()
         })
+    }
+
+    fun setToolbarConfigurations() {
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.item_mapeo_list_toolbar)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu){
+        super.onPrepareOptionsMenu(menu)
+        menu.findItem(R.id.item_toolbar_search).isVisible = false
+        menu.findItem(R.id.item_toolbar_edit).isVisible = false
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+        inflater.inflate(R.menu.menu, menu)
     }
 }

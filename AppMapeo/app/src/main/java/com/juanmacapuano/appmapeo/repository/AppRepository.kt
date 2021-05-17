@@ -62,6 +62,10 @@ class AppRepository(application: Application) {
     fun getAllMapeos(id : Long) : LiveData<List<MapeoEntity>> {
         return mapeoDao.getAllMapeos(id)
     }
+
+    suspend fun getMapeoByNumber(id: Long, number : String) : Int = withContext(Dispatchers.IO){
+        return@withContext mapeoDao.getMapeoByNumber(id, number)
+    }
     //endregion
 
 

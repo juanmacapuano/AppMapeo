@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.juanmacapuano.appmapeo.ProjectListViewModel" />
+            type="com.juanmacapuano.appmapeo.viewModel.ProjectListViewModel" />
 
         <variable
             name="itemFragment"
@@ -56,13 +56,16 @@
 
             <EditText
                 android:id="@+id/et_item_project_date"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:focusable="false"
                 android:hint="@string/item_project_date"
-                android:inputType="textPersonName"
+                android:inputType="date"
+                android:onClick="@{() -> itemFragment.showDatePickerDialog()}"
                 android:text="@={viewModel.et_item_project_date}"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -71,10 +74,10 @@
                 tools:text="12/12/12" />
 
             <EditText
-                android:id="@+id/et_item_project_description"
+                android:id="@+id/et_item_project_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/et_item_project_title"
+                android:layout_below="@+id/et_item_mapeo_number"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="@dimen/item_horizontal_margin"
                 android:layout_marginEnd="8dp"
@@ -99,7 +102,8 @@
                 android:text="@={viewModel.saveOrUpdateButtonText}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_item_project_description" />
+                app:visible="@{viewModel.btn_item_project_add}"
+                app:layout_constraintTop_toBottomOf="@+id/et_item_project_location" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

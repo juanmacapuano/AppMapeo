@@ -3,14 +3,15 @@ package com.juanmacapuano.appmapeo.projects
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.core.view.isGone
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.juanmacapuano.appmapeo.ProjectListViewModel
+import com.juanmacapuano.appmapeo.tools.DatePickerFragment
+import com.juanmacapuano.appmapeo.viewModel.ProjectListViewModel
 import com.juanmacapuano.appmapeo.R
 import com.juanmacapuano.appmapeo.databinding.FragmentItemProjectBinding
 import com.juanmacapuano.appmapeo.room.ProjectEntity
@@ -19,7 +20,6 @@ import kotlinx.coroutines.launch
 class ProjectItemFragment : Fragment() {
 
     companion object {
-       // fun newInstance(): ProjectItemFragment = ProjectItemFragment()
         const val TAG = "ProjectItemFragment"
         private const val KEY_PROJECT_ID = "project_id"
         private const val KEY_PROJECT_NAME = "project_name"
@@ -35,22 +35,7 @@ class ProjectItemFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val arg : Bundle
         projectEntity = ProjectEntity()
-        var extras: Bundle? = this.arguments
-        if (extras != null) {
-            val projectId : Long = extras.getLong(KEY_PROJECT_ID)
-            val projectName : String = extras.getString(KEY_PROJECT_NAME)!!
-            val projectDate : String = extras.getString(KEY_PROJECT_DATE)!!
-            val projectLocation : String = extras.getString(KEY_PROJECT_LOCATION)!!
-            isUpdate = true
-            projectEntity.id = projectId
-            projectEntity.name = projectName
-            projectEntity.date = projectDate
-            projectEntity.location = projectLocation
-        }
-
         setHasOptionsMenu(true)
     }
 
@@ -70,8 +55,6 @@ class ProjectItemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val sharedViewModel: ProjectListViewModel by activityViewModels()
-        //viewModel = ViewModelProvider(requireActivity()).get(ProjectListViewModel::class.java)
 
         binding?.apply {
             viewModel = sharedViewModel
@@ -79,7 +62,7 @@ class ProjectItemFragment : Fragment() {
             itemFragment = this@ProjectItemFragment
         }
         if (isUpdate) {
-            binding?.viewModel?.initUpdate(projectEntity)
+            binding?.viewModel?.initUpdateProject(projectEntity)
         }
         binding?.executePendingBindings();
 
@@ -89,19 +72,27 @@ class ProjectItemFragment : Fragment() {
             }
         })
 
-        if (sharedViewModel.isUpdateOrDelete) {
+        if (sharedViewModel.isUpdateOrDeleteProject) {
             setEditableFields(false)
-            binding?.btnItemProjectAdd?.isGone = true
+            //binding?.btnItemProjectAdd?.isGone = true
         } else {
             setEditableFields(true)
-            sharedViewModel.initInsert()
+            sharedViewModel.initInsertProject()
         }
+
+        setToolbarConfigurations()
+    }
+
+    private fun setToolbarConfigurations() {
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.item_project_item_toolbar)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun setEditableFields(state : Boolean) {
         binding?.etItemProjectTitle?.isEnabled = state
         binding?.etItemProjectDate?.isEnabled = state
-        binding?.etItemProjectDescription?.isEnabled = state
+        binding?.etItemProjectLocation?.isEnabled = state
+        sharedViewModel.setVisibility(state)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu){
@@ -119,7 +110,6 @@ class ProjectItemFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_toolbar_edit -> showBtnAddOrUpdate()
-            android.R.id.home -> findNavController().navigate(R.id.action_itemProjectFragment_to_listProjectFragment)
             else -> {
             }
         }
@@ -127,13 +117,14 @@ class ProjectItemFragment : Fragment() {
     }
 
     private fun showBtnAddOrUpdate() {
-        binding?.btnItemProjectAdd?.isGone = false
+
+        //binding?.btnItemProjectAdd?.isGone = false
         setEditableFields(true)
     }
 
     fun insertOrUpdateProject() = lifecycleScope.launch {
         var newRowId = -1
-        val checkEmptyFields = sharedViewModel.checkEmptyFields()
+        val checkEmptyFields = sharedViewModel.checkEmptyFieldsProject()
         if (checkEmptyFields) {
             newRowId = sharedViewModel.insertOrUpdateProject().toInt()
             if (newRowId > 0) {
@@ -148,12 +139,16 @@ class ProjectItemFragment : Fragment() {
     }
 
     fun goToMapeoFragmentList() {
-        //sharedViewModel.initMapeoFragmentList()
         findNavController().navigate(R.id.action_itemProjectFragment_to_mapeoListFragment)
     }
 
     override fun onDestroyView() {
         binding = null
         super.onDestroyView()
+    }
+
+    fun showDatePickerDialog() {
+        val newFragmentDialogDate = DatePickerFragment()
+        activity?.supportFragmentManager?.let { newFragmentDialogDate.show(it, "datePicker") }
     }
 }

@@ -1,5 +1,6 @@
 package com.juanmacapuano.appmapeo.mapeos
 
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -7,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.juanmacapuano.appmapeo.R
 import com.juanmacapuano.appmapeo.databinding.ItemListMapeoBinding
 import com.juanmacapuano.appmapeo.room.MapeoEntity
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MapeoAdapter(private val clickListener:(MapeoEntity)->Unit) : RecyclerView.Adapter<MapeoAdapter.ItemMapeoViewHolder>() {
 
@@ -37,7 +41,7 @@ class MapeoAdapter(private val clickListener:(MapeoEntity)->Unit) : RecyclerView
         fun bind(mapeoEntity: MapeoEntity, clickListener: (MapeoEntity) -> Unit) {
             binding.tvCvNumMapeo.text = mapeoEntity.number
             binding.tvCvDateMapeo.text = mapeoEntity.date
-            binding.tvCvTridiMapeo.text = mapeoEntity.tridi
+            binding.tvCvTridiMapeo.text = mapeoEntity.stationTotalNumber
             binding.layoutItemListMapeo.setOnClickListener {
                 clickListener(mapeoEntity)
             }

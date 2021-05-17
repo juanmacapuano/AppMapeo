@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 @Database(
     entities = [ProjectEntity::class, MapeoEntity::class],
-        version = 2,
+        version = 4,
         exportSchema = false
 )
 abstract class DatabaseApp : RoomDatabase(){
